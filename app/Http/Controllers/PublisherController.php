@@ -36,6 +36,6 @@ class PublisherController extends Controller
         $publisher->save();
 
         
-        return $publisher;
+        return redirect(action('PublisherController@index'));
     }
 }

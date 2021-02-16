@@ -5,7 +5,9 @@
 <ul>
     @foreach($categories as $c)
         <li>
+            <a href="{{ action('EshopController@category', $c->id) }}">
             {{ $c->name }}
+            </a>
         </li>
     @endforeach
 </ul>

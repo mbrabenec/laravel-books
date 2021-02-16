@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Book;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\DB;
 
@@ -10,8 +11,8 @@ class EshopController extends Controller
 {
     public function index()
     {
-        $categories = DB::table('categories')->get();
-        $books      = DB::table('books')->get();
+        $categories = Category::get();
+        $books      = Book::get();
 
         return view('eshop.index', compact('categories', 'books'));
     }
