@@ -32,3 +32,7 @@ Route::get('/publishers/{id}', 'PublisherController@show');
 Route::get('/eshop', 'EshopController@index');
 Route::get('/eshop/categories/{id}', 'EshopController@category');
 Route::get('/eshop/subcategories/{id}', 'EshopController@subcategory');
+
+Route::get('/bookshops/create', 'BookshopController@create');
+Route::post('/bookshops/store', 'BookshopController@store');
+Route::get('/bookshops', 'BookshopController@index');
