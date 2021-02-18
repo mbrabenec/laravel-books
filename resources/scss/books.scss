@@ -1,11 +1,3 @@
-.form-field {
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-
-    label {
-        color:orange;
-        margin-bottom: 1em;
-    }
-}
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

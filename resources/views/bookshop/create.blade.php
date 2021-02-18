@@ -17,7 +17,9 @@
             <input type="text" name="city">
         </div>
 
-        <div class='form-field'><input type="submit" value="add bookshop"></div>
+        <div class='form-field'><button type="submit" class='bg-gray-300 rounded-md h-10 px-6 m-6'>Add bookshop</button></div>
     </form>
+
+    
 
 @endsection

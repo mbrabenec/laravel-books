@@ -1,4 +1,6 @@
 const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
+
 require('dotenv').config();
 /*
  |--------------------------------------------------------------------------
@@ -21,9 +23,14 @@ if (!mix.inProduction()) {
     })
     .sourceMaps()
 }
- 
-mix.sass('resources/scss/books.scss', 'public/css')
- 
+
+mix.js("resources/js/app.js", "public/js")
+    .sass('resources/scss/books.scss', 'public/css')
+    .options({
+        processCssUrls: false,
+        postCss: [ tailwindcss('./tailwind.config.js') ],
+    })
+
     .browserSync({
         host: 'localhost',
         port: 3000,
