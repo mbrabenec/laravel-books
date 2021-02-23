@@ -10,7 +10,9 @@ class PublisherController extends Controller
 {
     public function index()
     {
-        $publishers = DB::table('publishers')->get();
+        // $publishers = DB::table('publishers')->get();
+        $publishers = Publisher::with('books')->orderBy('title')->get();
+
 
         return view('publishers.index', compact('publishers'));
     }
@@ -29,13 +31,65 @@ class PublisherController extends Controller
         return view('publishers.create');
     }
 
-    public function store(Request $request)
+    public function edit($publisher_id)
     {
-        $publisher = new Publisher;
+        $publisher = Publisher::findOrFail($publisher_id);
+
+        return view('publishers.edit', compact(['publisher']));
+    }
+
+    public function update(Request $request, $publisher_id)
+    {
+        //validation
+        // validation
+        $this->validate($request, [
+            'title' => 'required|unique:publishers'
+        ], [
+            'title.required' => 'Just goddamn pick one'
+        ]);
+
+        //retireve
+        $publisher = Publisher::findOrFail($publisher_id);
+
+        //fill with data
         $publisher->title = $request->input('title');
+
+        //save: sql insert
         $publisher->save();
 
-        
+        //inform user of success
+        session()->flash('success_message', 'The publisher was saved');
+
+        //redirect
+        return redirect(action('PublisherController@index'));
+
+    }
+
+    public function store(Request $request)
+    {
+        // validation
+        $this->validate($request, [
+            'title' => 'required|unique:publishers'
+        ], [
+            'title.required' => 'Just goddamn pick one'
+        ]);
+
+
+        // validation passed...
+
+        //new pub obj
+        $publisher = new Publisher;
+
+        //fill with data
+        $publisher->title = $request->input('title');
+
+        //save: sql insert
+        $publisher->save();
+
+        //inform user of success
+        session()->flash('success_message', 'The publisher was saved');
+
+        //redirect
         return redirect(action('PublisherController@index'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Review;
 
 class BookController extends Controller
 {
@@ -55,7 +56,7 @@ class BookController extends Controller
 
     public function show($id){
 
-        $book = DB::table('books')->find($id);
+        $book = Book::find($id);
 
         return view('books.show', compact(['book']));
 
@@ -78,6 +79,30 @@ class BookController extends Controller
         $book->save();
 
         return redirect(action('BookController@index'));
+ 
+    }
+
+    public function review ($id, Request $request) {
+
+        
+
+        $this->validate($request, [
+            'rating' => ['required', 'digits_between:0,100'],
+            'text' => ['required', 'string','max:255']
+        ],[
+            'rating.required' => 'ENTER A RATING!!!!!!',
+            'rating.digits_between' => 'BETWEEN 0-100 !!!!!!',
+            'text.required' => "c'mon, type some text",
+            'text.string' => "c'mon, text",
+            'text.max' => "c'mon, type less"
+
+        ]);
+        
+        $data = $request->all();
+        $data['book_id'] = $id;
+        $review = Review::create($data);
+
+        return back();
 
     }
 

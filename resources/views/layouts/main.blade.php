@@ -10,8 +10,10 @@
 </head>
 
 <body>
-
+    @include('common.alerts')
     @yield('content') 
+
+    
 
 </body>
 
