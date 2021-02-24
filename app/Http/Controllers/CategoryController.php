@@ -8,39 +8,54 @@ use Symfony\Polyfill\Intl\Idn\Idn;
 
 class CategoryController extends Controller
 {
-
-    public function index ()
+    public function index()
     {
         $categories = Category::get();
-
         return view('categories.index', compact('categories'));
     }
 
-
-    public function show ($id)
+    public function show($id)
     {
         $category = Category::find($id);
-
-        
-
         return view('categories.show', compact('category'));
     }
 
-
-    public function store (Request $request)
+    public function edit($id)
     {
+        $category = Category::find($id);
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $category = Category::find($id);
+        $category['name'] = $request->input('name');
+        $category->save();
+        return redirect(action('CategoryController@index'));
+    }
+
+    public function store(Request $request)
+    {
+
+        $this->validate($request, [
+            'name' => ['required','max:250', 'unique:categories']
+        ]);
+
         Category::create($request->all());
-
         return back();
     }
 
-
-    public function destroy ($id)
+    public function destroy($id)
     {
-        $togo = Category::find($id);
-        $togo->delete();
+        $todel = Category::find($id);
+
+        if (count($todel->subcategories)) {
+            foreach ($todel->subcategories as $sub) {
+                $sub->delete();
+            }
+        }
+        $todel->delete();
 
         return back();
     }
-
 }

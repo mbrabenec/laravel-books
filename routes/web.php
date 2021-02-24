@@ -46,10 +46,15 @@ Route::get('/bookshops', 'BookshopController@index');
 Route::get('/categories', 'CategoryController@index');
 
 Route::post('/categories/store', 'CategoryController@store');
+Route::get('/categories/{id}/edit', 'CategoryController@edit');
+Route::post('/categories/{id}/update', 'CategoryController@update');
 Route::get('/categories/{id}', 'CategoryController@show');
 Route::get('/categories/{id}/destroy', 'CategoryController@destroy');
 
+Route::get('/subcategories/{id}/edit', 'SubcategoryController@edit');
+Route::post('/subcategories/{id}/update', 'SubcategoryController@update');
 Route::post('/subcategories/{id}/store', 'SubcategoryController@store');
+Route::post('/subcategories/store', 'SubcategoryController@storeflex');
 
 Route::get('/subcategories/{id}/destroy', 'SubcategoryController@destroy');
 
