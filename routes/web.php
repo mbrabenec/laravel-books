@@ -22,6 +22,7 @@ Route::get('/api/books', 'APIBookController@index');
 Route::get('/books', 'BookController@index');
 Route::get('/books/create', 'BookController@create');
 Route::post('/books/{id}/review', 'BookController@review');
+Route::post('/books/{id}/delreview', 'BookController@delreview')->middleware('can:admin');
 Route::post('/books/store', 'BookController@store');
 Route::get('/books/{id}', 'BookController@show');
 

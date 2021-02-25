@@ -106,4 +106,17 @@ class BookController extends Controller
 
     }
 
+    public function delreview ($id) {
+
+        $todel = Review::find($id);
+        $todel->delete();
+
+
+
+        return back();
+
+    }
+
+    
+
 }
