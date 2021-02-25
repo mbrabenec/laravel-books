@@ -59,3 +59,11 @@ Route::post('/subcategories/store', 'SubcategoryController@storeflex');
 Route::get('/subcategories/{id}/destroy', 'SubcategoryController@destroy');
 
 
+Route::get('/reservations', 'ReservationController@index');
+Route::get('/reservations/create', 'ReservationController@create');
+// ->middleware('auth');
+Route::post('/reservations', 'ReservationController@store');
+
+//ORDERS
+Route::get('/orders', 'OrderController@index');
+Route::post('/orders/store', 'OrderController@store');
