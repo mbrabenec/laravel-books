@@ -68,3 +68,5 @@ Route::post('/reservations', 'ReservationController@store');
 //ORDERS
 Route::get('/orders', 'OrderController@index');
 Route::post('/orders/store', 'OrderController@store');
+
+Route::get('/search', 'SearchController@books');

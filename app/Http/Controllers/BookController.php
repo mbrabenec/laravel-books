@@ -12,7 +12,8 @@ class BookController extends Controller
     public function index()
     {
         $count = DB::table('books')->count();
-        $books     = DB::table('books')->get();
+        // $books     = DB::table('books')->offset(10)->limit(10)->orderBy('title','asc')->get();
+        $books     = DB::table('books')->orderBy('id','asc')->paginate(20);
 
 //        return view('books.books')
 //            ->with('count', $count)

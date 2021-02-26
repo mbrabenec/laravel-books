@@ -21,4 +21,8 @@
             </a>
         </li>
     @endforeach
+    <br>
+
+    {{ $books->onEachSide(3)->links() }}
+
 </ul>
